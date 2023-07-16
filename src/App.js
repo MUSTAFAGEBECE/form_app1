@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from "react";
+import Button from "./components/Button/Button";
+import Input from "./components/Input/Input";
+import Form from "./components/Form/Form"
+import './App.css'
 function App() {
+  const [userForm, setUserForm] = useState({
+    userName: "",
+    password: ""
+  })
+ 
+  const onValidation = () => {
+    if (userForm.userName === "" || userForm.password === "") {
+      alert("Geçersiz Form")
+    } else {
+      alert("Form Gönderildi")
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="custom-page">
+
+      <Form>
+        <h2>Giriş Sayfası</h2>
+        <Input value={userForm.userName} placeholder={"Kullanıcı Adı"} onChange={(e) => {
+         setUserForm({ ...userForm, userName: e.target.value })
+        }} />
+
+        <Input type="password" value={userForm.password} placeholder={"Parola"} onChange={(e) => {
+          setUserForm({ ...userForm, password: e.target.value })
+        }} />
+
+        <Button text="Giriş Yap" onClick={onValidation} />
+      </Form>
+
     </div>
   );
 }
 
 export default App;
+
+/*
+const [userForm, setUserForm] = useState({
+    userName: "",
+    password: ""
+  })
+
+ <Input value={userForm.userName} placeholder={"Kullanıcı Adı"} onChange={(e) => {
+         setUserForm({ ...userForm, userName: e.target.value })
+        }} />
+
+        <Input type="password" value={userForm.password} placeholder={"Parola"} onChange={(e) => {
+          setUserForm({ ...userForm, password: e.target.value })
+        }} />
+ <div className="custom-form">
+            {children}
+        </div>
+)
+*/
